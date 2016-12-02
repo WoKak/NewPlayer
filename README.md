@@ -5,6 +5,7 @@
 - ten kod ;)
 
 Step by step:
+
 1)
 Zainstaluj maven
 
