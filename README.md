@@ -17,7 +17,7 @@ Do pliku pom.xml skopiuj zawartość pom.xml znajdującego się w repozytorium
 
 4)
 Zgodnie z instrukcją podaną na stronie: https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html
-załaduj lokalnego repozytorium pliki .*jar.
+załaduj do lokalnego repozytorium pliki .*jar.
 
 UWAGA!
 Zwróć uwagę, że w pliku pom.xml znajdziesz potrzebne informacje.
