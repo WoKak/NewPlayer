@@ -13,10 +13,10 @@ public class PlayAction implements ActionListener {
     private static int play = -1;
     private static FileInputStream fis;
     private static Playing playing = null;
-    private double tmpProgress;
+    private static double tmpProgress;
 
     ImageIcon pauseIcon = new ImageIcon("icons/pause.png");
-    ImageIcon playIcon = new ImageIcon("icons/play.png");
+    static ImageIcon playIcon = new ImageIcon("icons/play.png");
 
     /**
      * Method Playing is a Singleton. It makes sure there is always only one Playing.

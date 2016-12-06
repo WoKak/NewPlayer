@@ -24,40 +24,46 @@ public class Playing {
 
     private int playerStatus = NOTSTARTED;
 
+    private static boolean isFirstFrame = true;
+
     public Playing(final InputStream inputStream) throws JavaLayerException {
         this.player = new Player(inputStream);
     }
+
     /**
      * Method play starts playing the song.
+     *
      * @throws JavaLayerException
      */
     public void play() throws JavaLayerException {
-            synchronized (playerLock) {
-                switch (playerStatus) {
-                    case NOTSTARTED:
-                        final Runnable r = new Runnable() {
-                            public void run() {
-                                playInternal();
-                            }
-                        };
-                        final Thread t = new Thread(r);
-                        t.setDaemon(true);
-                        t.setPriority(Thread.MAX_PRIORITY);
-                        playerStatus = PLAYING;
-                        t.start();
-                        break;
-                    case PAUSED:
-                        resume();
-                        break;
-                    default:
-                        break;
-                }
+        synchronized (playerLock) {
+            switch (playerStatus) {
+                case NOTSTARTED:
+                    final Runnable r = new Runnable() {
+                        public void run() {
+                            playInternal();
+                        }
+                    };
+                    final Thread t = new Thread(r);
+                    t.setDaemon(true);
+                    t.setPriority(Thread.MAX_PRIORITY);
+                    playerStatus = PLAYING;
+                    t.start();
+                    break;
+                case PAUSED:
+                    resume();
+                    break;
+                default:
+                    break;
             }
+        }
     }
-/**
- * Method pause pauses song.
- * @return
- */
+
+    /**
+     * Method pause pauses song.
+     *
+     * @return
+     */
     public boolean pause() {
         synchronized (playerLock) {
             if (playerStatus == PLAYING) {
@@ -67,10 +73,12 @@ public class Playing {
             return playerStatus == PAUSED;
         }
     }
-/**
- * Method resume resumes playing song.
- * @return
- */
+
+    /**
+     * Method resume resumes playing song.
+     *
+     * @return
+     */
     public boolean resume() {
         synchronized (playerLock) {
             if (playerStatus == PAUSED) {
@@ -80,9 +88,10 @@ public class Playing {
             return playerStatus == PLAYING;
         }
     }
-/**
- * Method stop stops playing.
- */
+
+    /**
+     * Method stop stops playing.
+     */
     public void stop() {
         synchronized (playerLock) {
             playerStatus = FINISHED;
@@ -90,40 +99,64 @@ public class Playing {
 
         }
     }
-/**
- * Method playInternal plays the song frame by frame.
- */
+
+    /**
+     * Method playInternal plays the song frame by frame.
+     */
     private void playInternal() {
-        while (playerStatus != FINISHED) {
-            try {
-                if (!player.play(1)) {
-                    Controls.getNextButton().doClick();
-                    Progress.getButton().doClick();
-                }
-            } catch (final JavaLayerException e) {
-                break;
-            }
-            synchronized (playerLock) {
-                while (playerStatus == PAUSED) {
-                    try {
-                        playerLock.wait();
-                    } catch (final InterruptedException e) {
-                        break;
+        try {
+            while (playerStatus != FINISHED) {
+                if (!isFirstFrame) {
+                    while (playerStatus != FINISHED) {
+
+                        try {
+                            if (!player.play(1)) {
+                                Controls.getNextButton().doClick();
+                                Progress.getButton().doClick();
+                            }
+                        } catch (final JavaLayerException e) {
+                            break;
+                        }
+                        synchronized (playerLock) {
+                            while (playerStatus == PAUSED) {
+                                try {
+                                    playerLock.wait();
+                                } catch (final InterruptedException e) {
+                                    break;
+                                }
+                            }
+                        }
                     }
+                    close();
+                } else {
+                    player.play(0);
+                    Thread.sleep(1000);
+                    isFirstFrame = false;
                 }
             }
+        } catch (final JavaLayerException e) {
+        } catch (InterruptedException e) {
         }
-        close();
     }
-/**
- * Method close starts playing next song after finishing previous one.
- */
+
+    /**
+     * Method close starts playing next song after finishing previous one.
+     */
     public void close() {
         synchronized (playerLock) {
             playerStatus = FINISHED;
         }
         try {
             player.close();
-        } catch (final Exception e) {}
+        } catch (final Exception e) {
+        }
+    }
+
+    public static boolean isFirstFrame() {
+        return isFirstFrame;
+    }
+
+    public static void setFirstFrame(boolean firstFrame) {
+        isFirstFrame = firstFrame;
     }
 }

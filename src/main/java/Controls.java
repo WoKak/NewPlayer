@@ -25,7 +25,7 @@ public class Controls extends JPanel {
     private static JButton addButton;
 
 
-    ImageIcon pauseIcon = new ImageIcon("icons/pause.png");
+    static ImageIcon pauseIcon = new ImageIcon("icons/pause.png");
 
     /**
      * Method Controls defines all the buttons, sets icons and funcions of the buttons.
@@ -100,6 +100,9 @@ public class Controls extends JPanel {
                         Progress.setMax(Progress.duration(Playlist.getCurrent()));
                         Progress.setTick(100 / Progress.getMax());
 
+                        //flag operatons
+                        Playing.setFirstFrame(true);
+
                         PlayAction.getPlaying().play();
                     }
                 } catch (JavaLayerException ex) {
@@ -142,6 +145,9 @@ public class Controls extends JPanel {
                         Progress.setProgress(0.0);
                         Progress.setMax(Progress.duration(Playlist.getCurrent()));
                         Progress.setTick(100 / Progress.getMax());
+
+                        //flag operatons
+                        Playing.setFirstFrame(true);
 
                         PlayAction.getPlaying().play();
                     }
@@ -203,6 +209,9 @@ public class Controls extends JPanel {
                     Progress.setMax(Progress.duration(Playlist.getCurrent()));
                     Progress.setTick(100 / Progress.getMax());
 
+                    //flag operatons
+                    Playing.setFirstFrame(true);
+
                     PlayAction.getPlaying().play();
                 } catch (Exception ex) {
                 }
@@ -212,11 +221,13 @@ public class Controls extends JPanel {
         add(buttonPanel);
 
     }
+
     /**
      * Method makeButton creates button
+     *
      * @param button
      * @param width
-     * @param icon 
+     * @param icon
      */
     private void makeButton(JButton button, int width, String icon) {
         int a = 50;
@@ -232,21 +243,21 @@ public class Controls extends JPanel {
 
     /**
      * PlayButton getter
-     * @return 
+     * @return
      */
     public static JButton getPlayButton() {
 
         return playButton;
 
     }
+
     /**
      * Next Button getter
-     * @return 
+     * @return
      */
     public static JButton getNextButton() {
 
         return nextButton;
 
     }
-
 }
