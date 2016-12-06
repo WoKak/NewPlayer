@@ -111,8 +111,12 @@ public class Playing {
 
                         try {
                             if (!player.play(1)) {
-                                Controls.getNextButton().doClick();
-                                Progress.getButton().doClick();
+                                if(loop()) {
+                                    Controls.getNextButton().doClick();
+                                    Progress.getButton().doClick();
+                                } else {
+                                    break;
+                                }
                             }
                         } catch (final JavaLayerException e) {
                             break;
@@ -152,11 +156,17 @@ public class Playing {
         }
     }
 
-    public static boolean isFirstFrame() {
-        return isFirstFrame;
-    }
-
     public static void setFirstFrame(boolean firstFrame) {
         isFirstFrame = firstFrame;
+    }
+
+    public static boolean loop() {
+        File tmp = Playlist.getCurrent();
+        int idx = Playlist.find(tmp);
+
+        if (idx + 1 < Playlist.getSongs().size())
+            return true;
+        else
+            return false;
     }
 }
