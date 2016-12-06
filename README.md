@@ -1,4 +1,5 @@
 (English version below)
+
 Żeby uruchomić ten kod potrzebne są:
 
 - maven
@@ -51,6 +52,9 @@ Copy pom.xml content to your project pom.xml file
 4)
 Follow the instruction on website: https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html
 load to local repository *.jar files
+
+HINT!
+All required information is available in pom.xml file
 
 5)
 Run project
