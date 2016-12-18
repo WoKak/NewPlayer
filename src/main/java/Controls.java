@@ -50,6 +50,7 @@ public class Controls extends JPanel {
         makeButton(addButton, width - 54, "icons/add.png");
 
         playButton.addActionListener(new PlayAction());
+        playButton.setToolTipText("Odtwarzaj/Zatrzymaj muzykę");
 
         /**
          * ActionListener addButton is responsible for opening a new window, 
@@ -69,6 +70,7 @@ public class Controls extends JPanel {
                 Playlist.add(chooser.getSelectedFile().getPath());
             }
         });
+        addButton.setToolTipText("Dodaj piosenkę");
 
         /**
          * ActionListener previousButton checks if there is a song before current one.
@@ -112,6 +114,7 @@ public class Controls extends JPanel {
                 }
             }
         });
+        previousButton.setToolTipText("Poprzednia piosenka");
 
         /**
          * ActionListener nextButton checks if there is a song after current one.
@@ -158,6 +161,7 @@ public class Controls extends JPanel {
                 }
             }
         });
+        nextButton.setToolTipText("Następna piosenka");
 
         /**
          * ActionListener stopButton stops current song.
@@ -179,6 +183,7 @@ public class Controls extends JPanel {
                 }
             }
         });
+        stopButton.setToolTipText("Stop");
 
         /**
          * ActionListener randomButton chooses randomly a new song from playlist and starts playing it.
@@ -217,6 +222,7 @@ public class Controls extends JPanel {
                 }
             }
         });
+        randomButton.setToolTipText("Losuj piosenkę");
 
         add(buttonPanel);
 

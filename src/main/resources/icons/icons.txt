@@ -5,3 +5,5 @@ http://www.flaticon.com/free-icon/music-player_149102#term=music&page=1&position
 http://www.flaticon.com/free-icon/eject_149130#term=music&page=1&position=42
 http://www.flaticon.com/free-icon/shuffle_149131#term=random&page=1&position=3
 http://www.flaticon.com/free-icon/plus_149145#term=add&page=1&position=1
+http://www.flaticon.com/free-icon/download_149184
+http://www.flaticon.com/free-icon/save_149111
