@@ -60,7 +60,7 @@ public class AudioFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    File file = new File("savedplaylist.txt");
+                    File file = new File("savedplaylists/savedplaylist.txt");
                     FileWriter writer = new FileWriter(file);
 
                     for (int i = 0; i < Playlist.getSongs().size(); i++) {
@@ -77,7 +77,7 @@ public class AudioFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    File file = new File("savedplaylist.txt");
+                    File file = new File("savedplaylists/savedplaylist.txt");
                     FileReader reader = new FileReader(file);
                     BufferedReader bufferedReader = new BufferedReader(reader);
 
