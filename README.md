@@ -27,6 +27,10 @@ Zwróć uwagę, że w pliku pom.xml znajdziesz potrzebne informacje.
 5)
 Uruchom projekt
 
+!!!
+W najnowszej wersji wystarczy tylko uruchomić plik .jar
+z folderu resurces
+
 
 ----------------------------------
 
@@ -58,3 +62,7 @@ All required information is available in pom.xml file
 
 5)
 Run project
+
+!!!
+In the latest version, running program only requires running .jar file
+from resources directory
