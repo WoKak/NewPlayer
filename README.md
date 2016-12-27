@@ -29,7 +29,7 @@ Uruchom projekt
 
 !!!
 W najnowszej wersji wystarczy tylko uruchomić plik .jar
-z folderu resurces
+z folderu resources
 
 
 ----------------------------------
