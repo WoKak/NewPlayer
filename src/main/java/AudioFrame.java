@@ -65,6 +65,7 @@ public class AudioFrame extends JFrame{
 
                     for (int i = 0; i < Playlist.getSongs().size(); i++) {
                         writer.write(Playlist.getSongs().get(i).getFile().getPath());
+                        writer.write("\n");
                     }
 
                     writer.close();
