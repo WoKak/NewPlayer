@@ -1,3 +1,5 @@
+[![Code Climate](https://lima.codeclimate.com/github/WoKak/NewPlayer/badges/gpa.svg)](https://lima.codeclimate.com/github/WoKak/NewPlayer)
+
 (English version below)
 
 Żeby uruchomić ten kod potrzebne są:
