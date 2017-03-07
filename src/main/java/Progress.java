@@ -1,18 +1,20 @@
-import org.tritonus.share.sampled.file.TAudioFileFormat;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JButton;
+import javax.swing.SwingWorker;
 import java.util.Map;
+
+import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 /**
  * Created by Michał on 2016-11-15.
@@ -27,10 +29,12 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
     private static double progress;
     private static double max;
     private static double tick;
+
     /**
      * Class UpdateProgressBar is responsible for the bar movement. It divides
      * the bar into 100 ticks and increases it as the song runs.
      */
+
     public class UpdateProgressBar extends SwingWorker<Void, Void> {
         @Override
         public Void doInBackground() {
@@ -57,29 +61,35 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
             return null;
         }
     }
+
     /**
      * Method actionPerformer is resposnible for starting the Progress Bar
      * @param evt 
      */
+
     public void actionPerformed(ActionEvent evt) {
         upProgBar = new UpdateProgressBar();
         upProgBar.addPropertyChangeListener(this);
         upProgBar.execute();
     }
+
     /**
      * Method propertyChange sets the value of the progress bar
      * @param evt 
      */
+
     public void propertyChange(PropertyChangeEvent evt) {
         if ("progress" == evt.getPropertyName()) {
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);
         }
     }
+
     /**
      * Method Progress is responsible for showing the Progress Bar and its movement
      * @param width 
      */
+
     public Progress(int width) {
         current.setPreferredSize(new Dimension(width - 20, 50));
 
@@ -116,80 +126,47 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
         return duration;
 
     }
-    /**
-     * Button getter
-     * @return 
-     */
+
     public static JButton getButton() {
         return button;
     }
-    /**
-     * ProgressBar getter
-     * @return 
-     */
+
     public static JProgressBar getProgressBar() {
         return progressBar;
     }
-    /**
-     * ProgressBar setter
-     * @param progressBar 
-     */
+
     public static void setProgressBar(JProgressBar progressBar) {
         Progress.progressBar = progressBar;
     }
-    /**
-     * UpProgBar getter
-     * @return 
-     */
+
     public static UpdateProgressBar getUpProgBar() {
         return upProgBar;
     }
-    /**
-     * UpProgBar setter
-     * @param upProgBar 
-     */
+
     public static void setUpProgBar(UpdateProgressBar upProgBar) {
         Progress.upProgBar = upProgBar;
     }
-    /**
-     * Progress getter
-     * @return 
-     */
+
     public static double getProgress() {
         return progress;
     }
-    /**
-     * Progress setter
-     * @param progress 
-     */
+
     public static void setProgress(double progress) {
         Progress.progress = progress;
     }
-    /**
-     * Max getter
-     * @return 
-     */
+
     public static double getMax() {
         return max;
     }
-    /**
-     * Max setter
-     * @param max 
-     */
+
     public static void setMax(double max) {
         Progress.max = max;
     }
-    /**
-     * Tick getter
-     * @return 
-     */
+
     public static double getTick() {
         return tick;
     }
-    /**
-     * Tick setter
-     * @param tick 
-     */
+
     public static void setTick(double tick) {
         Progress.tick = tick;
     }

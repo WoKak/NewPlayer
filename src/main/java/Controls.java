@@ -1,14 +1,18 @@
-import javazoom.jl.decoder.JavaLayerException;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import javazoom.jl.decoder.JavaLayerException;
 
 /**
  * Class Controls is responcibe for all the buttons used by the program.
@@ -29,7 +33,6 @@ public class Controls extends JPanel {
 
     /**
      * Method Controls defines all the buttons, sets icons and funcions of the buttons.
-     *
      * @param width
      */
     Controls(int width) {
@@ -65,8 +68,10 @@ public class Controls extends JPanel {
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setCurrentDirectory(new File("*.*"));
                 chooser.showOpenDialog(getParent());
-                if (chooser.getSelectedFile() == null)
+                if (chooser.getSelectedFile() == null) {
+
                     return;
+                }
                 Playlist.add(chooser.getSelectedFile().getPath());
             }
         });
@@ -78,14 +83,16 @@ public class Controls extends JPanel {
          */
         previousButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 Controls.getPlayButton().setIcon(pauseIcon);
                 File tmp = Playlist.getCurrent();
                 int idx = Playlist.find(tmp);
                 try {
-                    if (idx < 1)
+                    if (idx < 1) {
+
                         return;
-                    else {
+
+                    } else {
 
                         //Stops current songs and starts playing previous one
                         Playlist.getSongs().get(Playlist.find(Playlist.getCurrent())).getLabel().setForeground(Color.BLACK);
@@ -122,7 +129,7 @@ public class Controls extends JPanel {
          */
         nextButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 Controls.getPlayButton().setIcon(pauseIcon);
 
                 try {
@@ -169,7 +176,7 @@ public class Controls extends JPanel {
         stopButton.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     File tmp = Playlist.getCurrent();
                     int idx = Playlist.find(tmp);
@@ -186,11 +193,11 @@ public class Controls extends JPanel {
         stopButton.setToolTipText("Stop");
 
         /**
-         * ActionListener randomButton chooses randomly a new song from playlist and starts playing it.
+         * ActionListener randomButton chooses randomly a new song from playlist and plays it.
          */
         randomButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     File tmp = Playlist.getCurrent();
                     int idx = Playlist.find(tmp);
@@ -225,20 +232,18 @@ public class Controls extends JPanel {
         randomButton.setToolTipText("Losuj piosenkę");
 
         add(buttonPanel);
-
     }
 
     /**
      * Method makeButton creates button
-     *
      * @param button
      * @param width
      * @param icon
      */
     private void makeButton(JButton button, int width, String icon) {
-        int a = 50;
-        int b = 50;
-        button.setPreferredSize(new Dimension(a, b));
+        int wdt = 50;
+        int hgt = 50;
+        button.setPreferredSize(new Dimension(wdt, hgt));
 
         ImageIcon img = new ImageIcon(icon);
         button.setIcon(img);
@@ -247,23 +252,13 @@ public class Controls extends JPanel {
 
     }
 
-    /**
-     * PlayButton getter
-     * @return
-     */
     public static JButton getPlayButton() {
 
         return playButton;
-
     }
 
-    /**
-     * Next Button getter
-     * @return
-     */
     public static JButton getNextButton() {
 
         return nextButton;
-
     }
 }
