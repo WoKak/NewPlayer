@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Random;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
@@ -68,10 +69,11 @@ public class Controls extends JPanel {
                 chooser.setAcceptAllFileFilterUsed(false);
                 chooser.setCurrentDirectory(new File("*.*"));
                 chooser.showOpenDialog(getParent());
-                if (chooser.getSelectedFile() == null) {
 
+                if(!Optional.of(chooser.getSelectedFile()).isPresent()) {
                     return;
                 }
+
                 Playlist.add(chooser.getSelectedFile().getPath());
             }
         });
@@ -206,7 +208,7 @@ public class Controls extends JPanel {
                     int t = r.nextInt(Playlist.getSongs().size() - 1);
                     //System.out.println(t); this lines role is checking if program runs correctly
 
-                    //Stops current song and starts palying another randomly chosen one
+                    //Stops current song and starts playing another randomly chosen one
                     Playlist.getSongs().get(Playlist.find(Playlist.getCurrent())).getLabel().setForeground(Color.BLACK);
                     tmp = Playlist.getSongs().get(t).getFile();
                     Playlist.setCurrent(tmp);
@@ -215,13 +217,13 @@ public class Controls extends JPanel {
                     PlayAction.destroyPlaying();
                     PlayAction.getPlaying();
 
-                    //operacje na pasku
+                    //bar operations
                     Progress.getProgressBar().setValue(0);
                     Progress.setProgress(0.0);
                     Progress.setMax(Progress.duration(Playlist.getCurrent()));
                     Progress.setTick(100 / Progress.getMax());
 
-                    //flag operatons
+                    //flag operations
                     Playing.setFirstFrame(true);
 
                     PlayAction.getPlaying().play();

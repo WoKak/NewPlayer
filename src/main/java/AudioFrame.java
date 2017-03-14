@@ -8,16 +8,18 @@ import java.io.*;
  * Class AudioFrame creates Visual Interface responcible for comunication with the user
  * Created by MichaĹ‚ on 2016-11-13.
  */
-public class AudioFrame extends JFrame{
-    public AudioFrame() {
-     /**
+public class AudioFrame extends JFrame {
+
+    /**
      * Method AudioFrame sets the size of a window and logo it contains.
      * Also this method initializes all the features and sets their location in the window.
      */
+    public AudioFrame() {
+
         int screenHeight = 1080;
         int screenWidth = 1920;
 
-        setSize(screenWidth / 2 - 600, screenHeight / 2 );
+        setSize(screenWidth / 2 - 600, screenHeight / 2);
         setLocationByPlatform(true);
 
         Image img = new ImageIcon("icons/kni.gif").getImage();
@@ -69,7 +71,8 @@ public class AudioFrame extends JFrame{
                     }
 
                     writer.close();
-                } catch (IOException ex) {}
+                } catch (IOException ex) {
+                }
             }
         });
         save.setToolTipText("Zapisuje playlistę");
@@ -88,7 +91,8 @@ public class AudioFrame extends JFrame{
                         Playlist.add(line);
                         line = bufferedReader.readLine();
                     }
-                } catch (IOException ex) {}
+                } catch (IOException ex) {
+                }
             }
         });
         load.setToolTipText("Pozwala wczytać ostatnio zapisaną playlistę");

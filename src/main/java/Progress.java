@@ -116,7 +116,6 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
             mili = (int) (microseconds / 1000);
             sec = (mili / 1000) % 60;
             min = (mili / 1000) / 60;
-            //System.out.println("time = " + min + ":" + sec);
         } else {
             throw new UnsupportedAudioFileException();
         }
@@ -124,7 +123,6 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
         duration = min * 60 + sec;
 
         return duration;
-
     }
 
     public static JButton getButton() {
@@ -133,18 +131,6 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
 
     public static JProgressBar getProgressBar() {
         return progressBar;
-    }
-
-    public static void setProgressBar(JProgressBar progressBar) {
-        Progress.progressBar = progressBar;
-    }
-
-    public static UpdateProgressBar getUpProgBar() {
-        return upProgBar;
-    }
-
-    public static void setUpProgBar(UpdateProgressBar upProgBar) {
-        Progress.upProgBar = upProgBar;
     }
 
     public static double getProgress() {
@@ -161,10 +147,6 @@ public class Progress extends JPanel implements ActionListener, PropertyChangeLi
 
     public static void setMax(double max) {
         Progress.max = max;
-    }
-
-    public static double getTick() {
-        return tick;
     }
 
     public static void setTick(double tick) {

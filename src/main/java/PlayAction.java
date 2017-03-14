@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.util.Optional;
 
 /**
  * Class PlayAction is responsibe for playing the music and Play/Pause function.
@@ -20,11 +21,10 @@ public class PlayAction implements ActionListener {
 
     /**
      * Method Playing is a Singleton. It makes sure there is always only one Playing.
-     *
      * @return
      */
     public static Playing getPlaying() {
-        if (playing == null) {
+        if (!Optional.ofNullable(playing).isPresent()) {
             try {
                 if (Playlist.getCurrent() == null) {
                     Playlist.setCurrent(Playlist.getSongs().get(0).getFile());
@@ -85,18 +85,6 @@ public class PlayAction implements ActionListener {
         }
     }
 
-    /**
-     * Play getter
-     * @return
-     */
-    public static int getPlay() {
-        return play;
-    }
-
-    /**
-     * Play setter
-     * @param play
-     */
     public static void setPlay(int play) {
         PlayAction.play = play;
     }

@@ -6,6 +6,7 @@ import java.awt.*;
  * Created by MichaĹ‚ on 2016-10-24.
  */
 public class GUI {
+
     /**
      * Method main is a main method of this program, creates AudioFrame and sets its featurs.
      * @param args 
