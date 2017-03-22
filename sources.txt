@@ -1,3 +1,7 @@
+KNI logo was used for creation of this project
+JLayer, MP3SPI libraries was used in this project.
+
+sources of images:
 http://www.flaticon.com/free-icon/play-button_149125#term=music&page=1&position=1
 http://www.flaticon.com/free-icon/stop_149126#term=music&page=1&position=24
 http://www.flaticon.com/free-icon/pause_149127#term=music&page=1&position=19
